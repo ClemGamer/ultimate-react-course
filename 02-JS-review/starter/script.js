@@ -142,3 +142,134 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+// // Destructuring
+
+// const book = getBook(2);
+
+// const { title, author, genres } = book;
+
+// console.log(title, author, genres);
+
+// const [primaryGenres, secondaryGenres, ...otherGenres] = genres;
+
+// console.log(primaryGenres, secondaryGenres, otherGenres);
+
+// const newGenres = [...genres, "epic fantasy"];
+
+// console.log(newGenres);
+
+// const updatedBook = {
+//   ...book,
+//   // Adding a new property.
+//   moviePublicationDate: "2020-10-10",
+//   // Overriting an existing property.
+//   pages: 1212,
+// };
+
+// console.log(updatedBook);
+
+// // Template literal
+// const summary = `${title} is a book.`;
+// console.log(summary);
+
+// // &&
+// console.log(true && "some"); // some
+// console.log(false && "some"); // false
+
+// // ||
+// console.log(true || "some"); // true
+// console.log(false || "some"); // some
+
+// // ??
+// const wrongCount = book.reviews.librarything.reviewsCount || "no data";
+// console.log(wrongCount); // no data
+
+// const correctCount = book.reviews.librarything.reviewsCount ?? "no data";
+// console.log(correctCount); // 0
+
+// // Optional chaining
+// const anotherBook = getBook(3);
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount ?? 0;
+  const librarything = book.reviews?.librarything?.getTotalReviewCount ?? 0;
+  return goodreads + librarything;
+}
+
+// console.log(getTotalReviewCount(anotherBook)); // 49701
+
+// array map
+// const elements = [1, 2, 3, 4, 5];
+
+// console.log(elements.map((el) => el * 2));
+
+// const books = getBooks();
+
+// console.log(books.map((book) => book.title));
+
+// console.log(
+//   books.map((book) => ({
+//     title: book.title,
+//     author: book.author,
+//     reviewsCount: getTotalReviewCount(book),
+//   }))
+// );
+
+// // array filter
+// const longBookWithMoview = books
+//   .filter((book) => book.pages > 500)
+//   .filter((book) => book.hasMovieAdaptation);
+// console.log(longBookWithMoview);
+
+// const adventures = books
+//   .filter((book) => book.genres.includes("adventure"))
+//   .map((book) => book.title);
+// console.log(adventures);
+
+// // array reduce
+// const pagesAllBooks = books.reduce((acc, book) => acc + book.pages, 0);
+// console.log(pagesAllBooks);
+
+// // array sort
+// const arr = [4, 6, 2, 7, 3, 9, 1];
+// arr.sort((a, b) => a - b);
+// console.log(arr);
+
+// const unsorted = [4, 6, 2, 7, 3, 9, 1];
+// // slice will copy and create a new array
+// const sorted = unsorted.slice().sort((a, b) => a - b);
+// console.log(unsorted);
+// console.log(sorted);
+
+// // Add book object
+// const newBook = {
+//   id: 6,
+//   title: "x",
+//   author: "y",
+// };
+// const booksAfterAdd = [...books, newBook];
+// console.log(booksAfterAdd);
+
+// // Delete book
+// const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+// console.log(booksAfterDelete);
+
+// // Update book
+// const booksAfterUpdate = booksAfterDelete.map((book) =>
+//   book.id === 1 ? { ...book, pages: 1 } : book
+// );
+// console.log(booksAfterUpdate);
+
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+async function getPosts() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  return data;
+}
+
+const posts = await getPosts();
+console.log(posts[0]);
