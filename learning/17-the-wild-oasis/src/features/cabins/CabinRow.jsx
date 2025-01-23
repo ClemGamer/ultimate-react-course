@@ -82,7 +82,7 @@ function CabinRow({ cabin }) {
       <Cabin>{name}</Cabin>
       <div>{maxCapacity}</div>
       <Price>{regularPrice}</Price>
-      <Discount>{discount}</Discount>
+      <Discount>{discount || "-"}</Discount>
       <div>
         <Modal>
           <Menus.Menu>
